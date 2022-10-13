@@ -1,4 +1,4 @@
-#!env python3
+#!/usr/bin/env python3
 
 from . import pieceOfData, component, game, player, command
 #from . import element, interprocess, game, player, cmd

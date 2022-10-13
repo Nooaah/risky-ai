@@ -32,7 +32,7 @@ python  hackagames/game421/local
 From the `local` script of a game (`game421/local` for instance).
 
 ```python
-#!env python3
+#!/usr/bin/env python3
 """
 HackaGame - Game - 421 
 """
@@ -77,7 +77,7 @@ Following the same idea, you can start from `game421/firstIA.py` script to gener
 In other terms, configure your `main.py` as follow: 
 
 ```python
-#!env python3
+#!/usr/bin/env python3
 """
 HackaGame - Game - 421 
 """

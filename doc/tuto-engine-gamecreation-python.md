@@ -33,7 +33,7 @@ At minima `gameEngine` python package derivate `hackapy.Game` class in the  `__i
 First, initialize python file and import the `hackapy` package.
 
 ```python 
-#!env python3
+#!/usr/bin/env python3
 """
 HackaGame - Game - Hello 
 """
@@ -89,7 +89,7 @@ The `start` script will permit to lauch the game server.
 It only instancate a Game with a determined number of players then call the `AbsGame` `start` method.
 
 ```python
-#!env python3
+#!/usr/bin/env python3
 """
 HackaGame - Game - Hello 
 """

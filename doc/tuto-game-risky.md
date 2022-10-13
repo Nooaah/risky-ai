@@ -74,7 +74,7 @@ Potentially, **draftAI** and **testRisky.py** are shared in your own repository.
 Considering this architecture, a first **myRiskyAI.py** look like: 
 
 ```python
-#!env python3
+#!/usr/bin/env python3
 """
 HackaGame player interface 
 """
@@ -126,7 +126,7 @@ The `decide` method uses the game engine to get a destription of all possible ac
 On this basis, the `testRisky.py` is an adapted copy of the `gameRisky/local` script:
 
 ```python
-#!env python3
+#!/usr/bin/env python3
 """
 HackaGame - Game - TicTacToe 
 """

@@ -48,7 +48,7 @@ from hackagames.game421.firstAI import PlayerRandom as Player
 The final `test421.py` is :
 
 ```python
-#!env python3
+#!/usr/bin/env python3
 from HackaGames.game421.gameEngine import GameSolo as Game
 from HackaGames.game421.firstAI import PlayerRandom as Player
 
