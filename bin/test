@@ -1,0 +1,17 @@
+#!env bash
+
+echo "#   T E S T - L E V E L  1"
+echo "## HackaPy"
+cd hackapy
+pytest
+echo ; echo "## Game: 421"
+cd ../game421
+pytest
+echo ; echo "## Game: TicTacToe"
+cd ../gameTictactoe
+pytest
+echo ; echo "## Game: Risky"
+cd ../gameRisky
+pytest
+
+echo ; echo "#   T E S T - L E V E L  2"

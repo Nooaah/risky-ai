@@ -1,0 +1,28 @@
+#!env python3
+"""
+HackaGame - Game - Risky 
+"""
+import sys, os
+from gameEngine import GameRisky
+
+# Local HackaGame:
+sys.path.insert(1, __file__.split('gameRisky')[0])
+import hackapy as hg
+
+# Commands:
+class StartCmd( hg.StartCmd ) :
+    def __init__(self) :
+        super().__init__(
+            "risky",
+            ["board-4", "board-10"],
+            parameters= { 
+                "n": ["number of games", 1],
+                "p": ["server port", 1400]
+            }
+        )
+
+cmd= StartCmd()
+print( cmd )
+
+game= GameRisky( 2, cmd.mode )
+game.start( (int)(cmd.parameter("n")), (int)(cmd.parameter("p")) )

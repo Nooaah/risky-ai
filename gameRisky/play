@@ -1,0 +1,20 @@
+#!env python3
+"""
+HackaGame player interface 
+"""
+import sys, os
+
+sys.path.insert( 1, __file__.split('gameRisky')[0] )
+import hackapy.command as cmd
+from terminalIHM import RiskyPlayer
+
+def main():
+    # Let's seat the game:
+    host, port= cmd.serverFromCmd()
+    print( f"let\'s go, seat on {host}:{port}." )
+    player= RiskyPlayer(True)
+    player.takeASeat( host, port )
+
+# script
+if __name__ == '__main__' :
+    main()

@@ -1,0 +1,19 @@
+#!env python3
+"""
+HackaGame player interface 
+"""
+
+from posixpath import split
+import sys
+import hackapy.command as cmd, hackapy.player as pl
+
+def main():
+    # Let's seat the game:
+    host, port= cmd.serverFromCmd()
+    print( f"let\'s go, seat on {host}:{port}." )
+    player= pl.PlayerIHM()
+    player.takeASeat( host, port )
+
+# script
+if __name__ == '__main__' :
+    main()
