@@ -1,4 +1,4 @@
-# HackaGames - An Hackable Games' Engine
+# 🔵 Risky Game (Team Blue)
 
 ![](resources/logo-128.png)
 
