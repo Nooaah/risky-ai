@@ -4,7 +4,7 @@ HackaGame player interface
 """
 import sys, os
 
-sys.path.insert( 1, __file__.split('gameRisky')[0] )
+sys.path.insert( 1, __file__.split('team_blue')[0] )
 import hackapy.command as cmd
 from terminalIHM import RiskyPlayer
 

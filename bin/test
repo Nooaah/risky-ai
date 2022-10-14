@@ -11,7 +11,7 @@ echo ; echo "## Game: TicTacToe"
 cd ../gameTictactoe
 pytest
 echo ; echo "## Game: Risky"
-cd ../gameRisky
+cd ../team_blue
 pytest
 
 echo ; echo "#   T E S T - L E V E L  2"

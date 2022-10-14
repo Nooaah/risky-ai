@@ -4,10 +4,10 @@ HackaGame - Game - Risky
 """
 import os, sys, random
 
-sys.path.insert(1, __file__.split('gameRisky')[0])
+sys.path.insert(1, __file__.split('team_blue')[0])
 import hackapy as hg
 
-gamePath= __file__.split('gameRisky')[0] + "/gameRisky"
+gamePath= __file__.split('team_blue')[0] + "/team_blue"
 
 # Army Attributes
 ACTION= 1
@@ -69,7 +69,7 @@ class GameRisky( hg.AbsSequentialGame ) :
             cellTo= int(action[2])
             force= int(action[3])
             army= self.armyOn(cellFrom)
-            if cellFrom in cellIds and cellTo in cellIds and army and army.status() == self.playerLetter(iPlayer) and army.attribute(FORCE) >= force :
+            if cellFrom in cellIds and cellTo in self.edgesFrom(cellFrom) and army and army.status() == self.playerLetter(iPlayer) and army.attribute(FORCE) >= force :
                 return self.actionMove( iPlayer, cellFrom, cellTo, force )
         if action[0] == "grow" and len( action ) == 2 :
             cellId= int(action[1])
@@ -242,7 +242,9 @@ class GameRisky( hg.AbsSequentialGame ) :
                 winners+= 1
         if winners == 1 and armies[iPlayer] == bestArmy :
             return 1
-        return armies[iPlayer] - bestArmy
+        if armies[iPlayer] == bestArmy :
+            return 0
+        return -1
     
     # Risky tools :
     def appendArmy( self, iPLayer, position, force, action= 0 ):
