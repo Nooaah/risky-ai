@@ -10,7 +10,7 @@
 The `local` script starts the game with an interactive interface in a shell playing against a `firstAI`.
 
 ```sh
-python3 hackagames/team_blue/local
+python3 hackagames/gameRisky/local
 ```
 
 The world is composed by interconnected nodes forming a tabletop as, for instance:
@@ -82,7 +82,7 @@ import sys, os, random
 
 sys.path.insert(1, __file__.split('draftAI')[0] + "/hackagames")
 import hackapy as hg
-import team_blue.gameEngine as game
+import gameRisky.gameEngine as game
 
 def main():
     player= myPlayer()
@@ -123,7 +123,7 @@ if __name__ == '__main__' :
 You can notice that the `wakeUp` and `perceive` methods load and maintain a copy of the Risky game engine in an instance attribute `game`.
 The `decide` method uses the game engine to get a destription of all possible actions before to choose one of them at random.
 
-On this basis, the `testRisky.py` is an adapted copy of the `team_blue/local` script:
+On this basis, the `testRisky.py` is an adapted copy of the `gameRisky/local` script:
 
 ```python
 #!env python3
@@ -131,8 +131,8 @@ On this basis, the `testRisky.py` is an adapted copy of the `team_blue/local` sc
 HackaGame - Game - TicTacToe 
 """
 
-from hackagames.team_blue.gameEngine import GameRisky
-from hackagames.team_blue.firstAI import PlayerRandom as Player1
+from hackagames.gameRisky.gameEngine import GameRisky
+from hackagames.gameRisky.firstAI import PlayerRandom as Player1
 from draftAI.myRiskyAI import myPlayer as Player2
 
 def main():
@@ -148,7 +148,7 @@ if __name__ == '__main__' :
 
 ## Customaize your AI: 
 
-To customize your AI you can use the game engine copy (cf. [risky.py](../team_blue/gameEngine/risky.py))
+To customize your AI you can use the game engine copy (cf. [risky.py](../gameRisky/gameEngine/risky.py))
 
 Somme of the available methods:
 
