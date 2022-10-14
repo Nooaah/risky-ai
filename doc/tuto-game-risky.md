@@ -10,7 +10,7 @@
 The `local` script starts the game with an interactive interface in a shell playing against a `firstAI`.
 
 ```sh
-python3 hackagames/gameRisky/local
+python3 hackagames/team_blue/local
 ```
 
 The world is composed by interconnected nodes forming a tabletop as, for instance:
@@ -61,14 +61,14 @@ The exact amount of damages at the end of the fight remains uncertain.
 
 ## Let an AI play:
 
-As for [421](tuto-game-421.md) game, we consider that you organize your repository to develop your AI aside of hackagames.
-Your repository contains at least :
+As for [421](tuto-game-421.md) game, we consider that you organize your directory to develop your AI aside of hackagames.
+Your local directory contains at least :
 
 - **hackagames** : a clone of hackagames repository, as it is, with no modification.
 - **draftAI** : a directory regrouping your AIs.
 - **testRisky.py** : a script to launch a configuration of risky with one of your AI.
 
-Then **draftAI** will contain at least one AI script as, for instance **myRiskyAI.py**.\
+Then **draftAI** will contain at least one AI script as, for instance **myRiskyAI.py**.
 Potentially, **draftAI** and **testRisky.py** are shared in your own repository.
 
 Considering this architecture, a first **myRiskyAI.py** look like: 
@@ -82,7 +82,7 @@ import sys, os, random
 
 sys.path.insert(1, __file__.split('draftAI')[0] + "/hackagames")
 import hackapy as hg
-import gameRisky.gameEngine as game
+import team_blue.gameEngine as game
 
 def main():
     player= myPlayer()
@@ -123,7 +123,7 @@ if __name__ == '__main__' :
 You can notice that the `wakeUp` and `perceive` methods load and maintain a copy of the Risky game engine in an instance attribute `game`.
 The `decide` method uses the game engine to get a destription of all possible actions before to choose one of them at random.
 
-On this basis, the `testRisky.py` is an adapted copy of the `gameRisky/local` script:
+On this basis, the `testRisky.py` is an adapted copy of the `team_blue/local` script:
 
 ```python
 #!env python3
@@ -131,15 +131,15 @@ On this basis, the `testRisky.py` is an adapted copy of the `gameRisky/local` sc
 HackaGame - Game - TicTacToe 
 """
 
-from HackaGames.gameRisky.gameEngine import GameRisky
-from HackaGames.game421.firstAI import PlayerRandom as Player1
-from draftAI.myRiskyAI import myPlayer as player2
+from hackagames.team_blue.gameEngine import GameRisky
+from hackagames.team_blue.firstAI import PlayerRandom as Player1
+from draftAI.myRiskyAI import myPlayer as Player2
 
 def main():
-    game= GameRisky( 2, "board-10" )
+    game= GameRisky( 2, "board-10" ) # the number of players and the tabletop to load.
     player1= Player1()
     player2= Player2()
-    game.local( [player1, player1], 1 )
+    game.local( [player1, player2], 1 ) # A list of players and the number of games to plays.
 
 # script
 if __name__ == '__main__' :
@@ -148,7 +148,7 @@ if __name__ == '__main__' :
 
 ## Customaize your AI: 
 
-To customize your AI you can use the game engine copy (cf. [risky.py](../gameRisky/gameEngine/risky.py))
+To customize your AI you can use the game engine copy (cf. [risky.py](../team_blue/gameEngine/risky.py))
 
 Somme of the available methods:
 

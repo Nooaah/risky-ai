@@ -143,7 +143,7 @@ def test_risky_end():
 
   assert game.playerArmies() == [0, 18, 12]
   assert game.playerScore( 1 ) == 1
-  assert game.playerScore( 2 ) == -6
+  assert game.playerScore( 2 ) == -1
 
   for i in range( game.duration ) :
     game.tic()
@@ -156,7 +156,7 @@ def test_risky_end():
   assert game.activePlayers() == [1]
   assert game.playerArmies() == [0, 18, 0]
   assert game.playerScore( 1 ) == 1
-  assert game.playerScore( 2 ) == -18
+  assert game.playerScore( 2 ) == -1
   assert game.isEnded()
 
 # Test fight ...

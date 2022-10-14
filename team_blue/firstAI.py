@@ -2,12 +2,11 @@
 """
 HackaGame player interface 
 """
-import sys, os, random
+import sys, random
 
-sys.path.insert(1, __file__.split('gameRisky')[0])
-
+sys.path.insert(1, __file__.split('team_blue')[0])
 import hackapy as hg
-import gameEngine as game
+import team_blue.gameEngine as game
 
 def main():
     player= PlayerRandom()
