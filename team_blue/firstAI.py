@@ -6,7 +6,7 @@ import sys, random
 
 sys.path.insert(1, __file__.split('team_blue')[0])
 import hackapy as hg
-import team_blue.gameEngine as game
+import gameRisky.gameEngine as game
 
 def main():
     player= PlayerRandom()
