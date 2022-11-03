@@ -36,6 +36,7 @@ class Local() :
     def __init__(self, players):
         # initialize the server
         self.players = [0] + players
+        self.idResults= { id(p): [] for p in players }
         
     # Engine process :
     def waitForPlayers(self, numberOfPlayers):
@@ -67,10 +68,15 @@ class Local() :
         return action
     
     def sleepPlayer( self, iPlayer, aPodable, result ):
+        self.idResults[ id(self.players[iPlayer]) ].append(result)
         verbose( f"\n> P U T   T O   S L E E P   P L A Y E R - {iPlayer}" )
         self.players[iPlayer].perceive( pod.Pod().load( aPodable.pod().dump() ) )
         self.players[iPlayer].sleep(result)
         verbose( f"\n> G A M E   P R O C E S S" )
+
+    # results :
+    def results(self):
+        return [ self.idResults[p] for p in self.idResults ]
 
 class Dealer() :
 
