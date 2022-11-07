@@ -2,10 +2,9 @@
 """
 HackaGame player interface 
 """
-import sys, os, random
+import sys, random
 
 sys.path.insert(1, __file__.split('gameRisky')[0])
-
 import hackapy as hg
 import gameEngine as game
 import json

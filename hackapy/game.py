@@ -43,8 +43,9 @@ class AbsGame():
     def local(self, players, numberOfGames= 1 ):
         print( f" local games: {players} - {numberOfGames} " )
         assert( len(players) == self.numberOfPlayers )
-        dealer= interprocess.Local(players)
+        dealer= interprocess.Local( players )
         self.startWithDealer(dealer, numberOfGames)
+        return dealer.results()
 
     def startWithDealer(self, dealer, numberOfGames):
         print( f'HackaGame: wait for {self.numberOfPlayers} players' )

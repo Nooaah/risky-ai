@@ -13,6 +13,9 @@ gamePath= __file__.split('gameRisky')[0] + "/gameRisky"
 ACTION= 1
 FORCE=  2
 
+def log(aString):
+    pass
+
 class GameRisky( hg.AbsSequentialGame ) :
 
     # Constructor :
@@ -28,7 +31,7 @@ class GameRisky( hg.AbsSequentialGame ) :
         self.wrongAction= [ 0 for i in range(0, numerOfPlayers+1) ]
         # Configuration
         self.degatMethod= self.degatStochastic
-        self.verbose= print
+        self.verbose= log
 
     def copy(self):
         cpy= GameRisky( self.numberOfPlayers, self.map )
@@ -69,7 +72,8 @@ class GameRisky( hg.AbsSequentialGame ) :
             cellTo= int(action[2])
             force= int(action[3])
             army= self.armyOn(cellFrom)
-            if cellFrom in cellIds and cellTo in cellIds and army and army.status() == self.playerLetter(iPlayer) and army.attribute(FORCE) >= force :
+
+            if ( cellFrom in cellIds and cellTo in self.edgesFrom(cellFrom) and army and army.status() == self.playerLetter(iPlayer) and 0 < force and force <= army.attribute(FORCE) ):
                 return self.actionMove( iPlayer, cellFrom, cellTo, force )
         if action[0] == "grow" and len( action ) == 2 :
             cellId= int(action[1])
@@ -80,7 +84,7 @@ class GameRisky( hg.AbsSequentialGame ) :
             return self.actionSleep( iPlayer )
 
         self.wrongAction[iPlayer]+= 1
-        print( f"!!! Wrong action: {action} !!!" )
+        print( f"!!! Wrong action {self.wrongAction[iPlayer]}: {action} !!!" )
         if self.wrongAction[iPlayer] >= 8 :
             return self.actionSleep( iPlayer )
         return False
@@ -242,7 +246,9 @@ class GameRisky( hg.AbsSequentialGame ) :
                 winners+= 1
         if winners == 1 and armies[iPlayer] == bestArmy :
             return 1
-        return armies[iPlayer] - bestArmy
+        if armies[iPlayer] == bestArmy :
+            return 0
+        return -1
     
     # Risky tools :
     def appendArmy( self, iPLayer, position, force, action= 0 ):
