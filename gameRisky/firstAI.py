@@ -7,7 +7,7 @@ import sys, os, random
 sys.path.insert(1, __file__.split('gameRisky')[0])
 
 import hackapy as hg
-import gameEngine as game
+import gameRisky.gameEngine as game
 import json
 
 
@@ -65,7 +65,7 @@ class QPlayer(hg.AbsPlayer):
     print(f'---\ngame end\nresult: {result}')
 
   def jsonValue(self):
-    fileObject = open("file.json", "r")
+    fileObject = open("teamBlue/file.json", "r")
     jsonContent = fileObject.read()
     if jsonContent != "":
       obj_python = json.loads(jsonContent)
