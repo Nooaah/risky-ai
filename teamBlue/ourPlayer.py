@@ -4,15 +4,15 @@ HackaGame player interface
 """
 import sys, random
 
-sys.path.insert(1, __file__.split('team_blue')[0])
+sys.path.insert(1, __file__.split('teamBlue')[0])
 import hackapy as hg
 import gameRisky.gameEngine as game
 
 def main():
-    player= PlayerRandom()
+    player= Player()
     player.takeASeat()
 
-class PlayerRandom(hg.AbsPlayer) :
+class Player(hg.AbsPlayer) :
     
     # Player interface :
     def wakeUp(self, iPlayer, numberOfPlayers, gameConf):

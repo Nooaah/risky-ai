@@ -13,6 +13,36 @@ def verbose(aString):
   print(aString)
 
 # Test move action ...
+def test_risky_wrongAction():
+  game= GameRisky()
+  game.initialize()
+  assert game.playerHand(1).dump() == """Board 1 2 0 8 : board-4 1 4
+- Cell-1 1 2 0 1 : 1 5 3
+  - Army 1 2 0 0 : A 1 12
+- Edge-1 1 3 0 0 : 1 2 3 4
+- Cell-2 1 2 0 1 : 2 5 15
+  - Army 1 2 0 0 : B 1 12
+- Edge-2 1 3 0 0 : 2 1 3 4
+- Cell-3 1 2 0 0 : 3 1 9
+- Edge-3 1 2 0 0 : 3 1 2
+- Cell-4 1 2 0 0 : 4 9 9
+- Edge-4 1 2 0 0 : 4 1 2"""
+  assert game.wrongAction == [0, 0, 0]
+  game.applyPlayerAction( 1, "move 1 2 0" )
+  assert game.playerHand(1).dump() == """Board 1 2 0 8 : board-4 1 4
+- Cell-1 1 2 0 1 : 1 5 3
+  - Army 1 2 0 0 : A 1 12
+- Edge-1 1 3 0 0 : 1 2 3 4
+- Cell-2 1 2 0 1 : 2 5 15
+  - Army 1 2 0 0 : B 1 12
+- Edge-2 1 3 0 0 : 2 1 3 4
+- Cell-3 1 2 0 0 : 3 1 9
+- Edge-3 1 2 0 0 : 3 1 2
+- Cell-4 1 2 0 0 : 4 9 9
+- Edge-4 1 2 0 0 : 4 1 2"""
+  assert game.wrongAction == [0, 1, 0]
+
+# Test move action ...
 def test_risky_Fight01():
   game= GameRisky()
   assert game.map == "board-4"

@@ -30,8 +30,7 @@ class ViewerTerminal:
                 maxLine= self.game.board.cell(i).attribute(1)
             if self.game.board.cell(i).attribute(2) > maxLenght :
                 maxLenght= self.game.board.cell(i).attribute(2)
-            
-        print( f"Grid size: ({maxLine}, {maxLenght})" )
+        
         self.grid= [ [' ' for i in range(maxLenght+4) ] for line in range(maxLine+2) ]
 
     def loadGridBackground( self, mapFile ):
