@@ -40,9 +40,18 @@ class QPlayer(hg.AbsPlayer):
   def perceive(self, gameState):
     self.game.update(gameState)
     #print(gameState)
-    self.state = hash(gameState)
     if self.qvalue == None:
       self.qvalue = {self.state: {}}
+    idcell = self.game.cellIds()
+    state = []
+    for i in idcell:
+      res = self.game.armyOn(i)
+      if res == False:
+        state.append([])
+      else:
+        state.append([res.status(), res.attributes()[0], res.attributes()[1]])
+    state.append(self.playerId)
+    self.state = str(state)
     #self.viewer.print(self.playerId)
 
   def decide(self):
@@ -75,7 +84,7 @@ class QPlayer(hg.AbsPlayer):
 
   def learnFromTraining(self):
     jsonString = json.dumps(self.qvalue)
-    jsonFile = open("file.json", "w")
+    jsonFile = open("teamBlue/file.json", "w")
     jsonFile.write(jsonString)
     jsonFile.close()
 

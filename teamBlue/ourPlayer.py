@@ -31,10 +31,22 @@ class Player(hg.AbsPlayer):
   def perceive(self, gameState):
     self.game.update(gameState)
     self.state = hash(gameState)
+    idcell = self.game.cellIds()
+    state = []
+    for i in idcell:
+      res = self.game.armyOn(i)
+      if res == False:
+        state.append([])
+      else:
+        state.append([res.status(), res.attributes()[0], res.attributes()[1]])
+    state.append(self.playerId)
+    self.state = str(state)
+
 
   def decide(self):
     actions = self.game.searchActions(self.playerId)
     if self.state not in self.qvalue.keys():
+      print("Not Dico")
       action = random.choice(actions)
       if action[0] == 'move':
         action[3] = random.randint(1, action[3])
@@ -44,14 +56,25 @@ class Player(hg.AbsPlayer):
       print("GO to dico")
       listeActions = []
       valeurAction = []
+      print(actions)
       for actionInfo in actions:
         if actionInfo[0] == 'move':
-          actionInfo[3] = random.randint(1, actionInfo[3])
+          for i in range (1, actionInfo[3] + 1):
+            actionInfo[3] = i
+            simpleAction = ' '.join([str(x) for x in actionInfo])
+            if simpleAction in self.qvalue[self.state].keys():
+              listeActions.append(simpleAction)
+              valeurAction.append(self.qvalue[self.state][simpleAction])
         simpleAction = ' '.join([str(x) for x in actionInfo])
+        print(actionInfo)
+        print(self.qvalue[self.state].keys())
+        print(simpleAction)
         if simpleAction in self.qvalue[self.state].keys():
           listeActions.append(simpleAction)
           valeurAction.append(self.qvalue[self.state][simpleAction])
-        index = valeurAction.index(max(valeurAction))
+          print(listeActions)
+          print(valeurAction)
+      index = valeurAction.index(max(valeurAction))
       return listeActions[index]
 
   def sleep(self, result):
