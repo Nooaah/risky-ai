@@ -14,7 +14,7 @@ class StartCmd( hg.StartCmd ) :
     def __init__(self) :
         super().__init__(
             "risky",
-            ["board-4", "board-10"],
+            ["board-10"],
             parameters= { 
                 "n": ["number of games", 1],
                 "p": ["server port", 1400]
