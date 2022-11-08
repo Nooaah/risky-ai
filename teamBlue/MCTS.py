@@ -213,9 +213,9 @@ class Player(hg.AbsPlayer):
 			playerLeft = 1
 		test = MCTSState(self.game, self.player, None, "self", playerLeft, self.game.counter)
 		nodeTest = MCTSNode(test, None)
-		action = self.best_action(nodeTest, 2)
+		action = self.best_action(nodeTest, 5)
 
-		#print(f'[Turn {self.game.counter}] AI Player - {action}')
+		print(f'[Turn {self.game.counter}] AI Player - {action}')
 
 		return action[0]
 	
