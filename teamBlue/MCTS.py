@@ -9,6 +9,7 @@ import sys
 import random
 import math
 import numpy as np
+from time import time as clock
 
 sys.path.insert(1, __file__.split('teamBlue')[0])
 
@@ -40,8 +41,8 @@ class MCTSNode():
 	def best_child(self, verbose=False):
 		for child in self.children: 
 			child.uct_score = child.uct()
-			if verbose:
-				print(f'n:{child.n} score: {child.uct_score} action:{child.state.action}')
+			# if verbose:
+			# 	print(f'n:{child.n} score: {child.uct_score} action:{child.state.action}')
 		#print(max(node.uct_score for node in self.children))
 
 		choices = [l for l in self.children if l.uct_score == max(node.uct_score for node in self.children)]
@@ -74,8 +75,19 @@ class MCTSState():
 
 	def moves(self):
 		moves = self.state.searchActions(self.playerToPlay[1])
-		# print(moves)
-		return moves
+		movesList = []
+		
+
+		for action in moves:
+			#print(action)
+			movesList.append(action)
+			if action[0] == 'move':
+				#print(action[3])
+				for i in range(int(action[3])):
+					action_to_add = [action[0], action[1], action[2], f'{i+1}']
+					movesList.append(action_to_add)
+		#print(movesList)
+		return movesList
 
 	def play(self, action):
 		new_state = self.state.copy()
@@ -163,24 +175,25 @@ class Player(hg.AbsPlayer):
 		if node.parent is not None:
 			self.backpropagate(node.parent, result)
 
-	def best_action(self, node):
-		nb_sims = 1000
-		for i in range(nb_sims):
+	def best_action(self, node, time_budget):
+		start_time = clock()
+		num_rollouts = 0
+		while clock() - start_time < time_budget:
 			#print(i)
 			v = self.traverse(node)
 			#print(v)
 			final_state = self.rollout(v.state)
 			self.backpropagate(v, final_state.result())
+			num_rollouts += 1
 		best_child = node.best_child()
+		#print(f'Number of experiments: {num_rollouts}')
 		return (best_child.state.action, best_child.uct())
-
-
 
 	#####
 
 	# Player interface :
 	def wakeUp(self, iPlayer, numberOfPlayers, gameConf):
-		print( f'---\nwake-up player-{iPlayer} ({numberOfPlayers} players)')
+		#print( f'---\nwake-up player-{iPlayer} ({numberOfPlayers} players)')
 		self.playerId= chr( ord("A")+iPlayer-1 )
 		self.player = iPlayer
 		self.game= game.GameRisky()
@@ -200,14 +213,15 @@ class Player(hg.AbsPlayer):
 			playerLeft = 1
 		test = MCTSState(self.game, self.player, None, "self", playerLeft, self.game.counter)
 		nodeTest = MCTSNode(test, None)
-		action = self.best_action(nodeTest)
+		action = self.best_action(nodeTest, 2)
 
-		print(f'[Turn {self.game.counter}] AI Player - {action}')
+		#print(f'[Turn {self.game.counter}] AI Player - {action}')
 
-		return action
+		return action[0]
 	
 	def sleep(self, result):
-		print( f'---\ngame end\nresult: {result}')
+		#print( f'---\ngame end\nresult: {result}')r
+		return
 
 # script
 if __name__ == '__main__' :
