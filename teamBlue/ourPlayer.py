@@ -40,8 +40,12 @@ class Player(hg.AbsPlayer):
       else:
         state.append([res.status(), res.attributes()[0], res.attributes()[1]])
     state.append(self.playerId)
-    self.state = str(state)
-
+    self.state = str(state)\
+      .replace('[','_').\
+        replace(']','').\
+          replace(' ','').\
+            replace('\'','').\
+              replace(',','')
 
   def decide(self):
     actions = self.game.searchActions(self.playerId)
