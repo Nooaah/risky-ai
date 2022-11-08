@@ -51,7 +51,12 @@ class QPlayer(hg.AbsPlayer):
       else:
         state.append([res.status(), res.attributes()[0], res.attributes()[1]])
     state.append(self.playerId)
-    self.state = str(state)
+    self.state = str(state)\
+      .replace('[','_').\
+        replace(']','').\
+          replace(' ','').\
+            replace('\'','').\
+              replace(',','')
     #self.viewer.print(self.playerId)
 
   def decide(self):
