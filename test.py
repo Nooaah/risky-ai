@@ -7,7 +7,6 @@ import time
 from gameRisky.gameEngine import GameRisky
 from gameRisky.firstAI import QPlayer as playerBlue
 from gameRisky.firstAI import PlayerRandom as playerTest
-from teamProf.bestRandomSim import Player as playerProf
 
 def playerId(aPlayer):
   return str(type(aPlayer).__module__).split('.')[0]
@@ -17,7 +16,7 @@ def main():
   players = [
     playerBlue(),
   ]
-  nboGames = 10
+  nboGames = 20
   resultFile = open('result.csv', 'w')
   refTime = time.time()
   for player in players:
