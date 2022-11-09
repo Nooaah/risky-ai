@@ -5,7 +5,7 @@ HackaGame - Game - TicTacToe
 import time
 
 from gameRisky.gameEngine import GameRisky
-from gameRisky.firstAI import QPlayer as playerBlue
+from teamBlue.QLearn import QPlayer as playerBlue
 from gameRisky.firstAI import PlayerRandom as playerTest
 from teamProf.bestRandomSim import Player as playerProf
 
@@ -17,7 +17,7 @@ def main():
   players = [
     playerBlue(),
   ]
-  nboGames = 10
+  nboGames = 100
   resultFile = open('result.csv', 'w')
   refTime = time.time()
   for player in players:
