@@ -5,8 +5,9 @@ HackaGame - Game - TicTacToe
 import time
 
 from gameRisky.gameEngine import GameRisky
-from teamProf.bestRandomSim import Player as playerProf
 from teamBlue.ourPlayer import Player as PlayerBlue
+from teamProf.bestRandomSim import Player as PlayerProf
+from gameRisky.firstAI import PlayerRandom as PlayerRandom
 
 
 def playerId(aPlayer):
@@ -24,7 +25,7 @@ def main():
     game = GameRisky(
       2, "board-10")  # the number of players and the tabletop to load.
     result = game.local(
-      [player, playerProf()],
+      [player, PlayerProf()],
       nboGames)  # A list of players and the number of games to plays.
     t = time.time()
     resultFile.write(
