@@ -5,8 +5,9 @@ HackaGame - Game - TicTacToe
 import time
 
 from gameRisky.gameEngine import GameRisky
-from gameRisky.firstAI import QPlayer as playerBlue
-from gameRisky.firstAI import PlayerRandom as playerTest
+from teamProf.bestRandomSim import Player as playerProf
+from teamBlue.ourPlayer import Player as PlayerBlue
+
 
 def playerId(aPlayer):
   return str(type(aPlayer).__module__).split('.')[0]
@@ -14,18 +15,17 @@ def playerId(aPlayer):
 
 def main():
   players = [
-    playerBlue(),
+    PlayerBlue(),
   ]
-  nboGames = 20
+  nboGames = 10
   resultFile = open('result.csv', 'w')
   refTime = time.time()
   for player in players:
     game = GameRisky(
       2, "board-10")  # the number of players and the tabletop to load.
     result = game.local(
-      [player, playerTest()],
+      [player, playerProf()],
       nboGames)  # A list of players and the number of games to plays.
-    print(result)
     t = time.time()
     resultFile.write(
       f"{playerId(player)}, playerTest, {round( (t-refTime)/nboGames, 4 )}, {sum(result[0])/nboGames}, {sum(result[1])/nboGames}\n"
